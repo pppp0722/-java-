@@ -1,7 +1,6 @@
 package test052;
 
 import java.util.stream.IntStream;
-
 // 프로그래머스 Level1 없는 숫자 더하기
 public class Test52 {
 	public static void main(String[] args) {
