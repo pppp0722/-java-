@@ -1,5 +1,6 @@
 package test058;
 // 프로그래머스 Level2 멀쩡한 사각형
+
 public class Test58 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
