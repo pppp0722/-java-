@@ -1,5 +1,6 @@
 package test067;
 // 프로그래머스 데브코스 코딩테스트 3번 문제
+
 public class Test67 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
