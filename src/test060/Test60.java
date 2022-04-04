@@ -3,8 +3,8 @@ package test060;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
-
 // 프로그래머스 Level2 기능개발
+
 public class Test60 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
