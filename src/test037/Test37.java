@@ -1,5 +1,6 @@
 package test037;
 // 프로그래머스/Level1/핸드폰 번호 가리기
+
 public class Test37 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
