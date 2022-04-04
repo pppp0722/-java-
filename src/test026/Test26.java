@@ -1,5 +1,6 @@
 package test026;
 // 프로그래머스/Level1/이상한 문자 만들기
+
 public class Test26 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
