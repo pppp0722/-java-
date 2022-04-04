@@ -1,5 +1,6 @@
 package test036;
 // 프로그래머스/Level1/하샤드 수
+
 public class Test36 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
