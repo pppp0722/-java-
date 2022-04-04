@@ -1,5 +1,6 @@
 package test054;
 // 프로그래머스 Level1 나머지 1이 되는 수 찾기
+
 public class Test54 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
