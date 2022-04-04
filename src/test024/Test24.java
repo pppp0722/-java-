@@ -1,5 +1,6 @@
 package test024;
 // 프로그래머스/Level1/시저 암호
+
 public class Test24 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
