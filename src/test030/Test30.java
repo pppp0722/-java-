@@ -1,5 +1,6 @@
 package test030;
 // 프로그래머스/Level1/정수 제곱근 판별
+
 public class Test30 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
