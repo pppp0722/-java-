@@ -1,7 +1,6 @@
 package test063;
 
 import java.util.Stack;
-
 // 프로그래머스 Level2 짝지어 제거하기
 public class Test63 {
 	public static void main(String[] args) {
