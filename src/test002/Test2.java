@@ -1,7 +1,6 @@
 package test002;
 // 프로그래머스/Level1/소수 만들기
 public class Test2 {
-
 	public static void main(String[] args) {
 		Solution sol = new Solution();
 		int[] input = {1,2,7,6,4};
