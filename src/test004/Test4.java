@@ -8,7 +8,6 @@ public class Test4 {
 		int[] output = sol.solution(input1, input2);
 		System.out.println(output[0] + " " + output[1]);
 	}
-
 }
 
 class Solution {
