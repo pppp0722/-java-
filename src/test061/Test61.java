@@ -1,7 +1,6 @@
 package test061;
 
 import java.util.PriorityQueue;
-
 // 프로그래머스 Level2 더맵게
 public class Test61 {
 	public static void main(String[] args) {
