@@ -2,7 +2,6 @@ package test012;
 import java.util.Arrays;
 // 프로그래머스/Level1/[1차] 비밀지도
 public class Test12 {
-
 	public static void main(String[] args) {
 		Solution sol = new Solution();
 		int input1 = 5;
@@ -11,7 +10,6 @@ public class Test12 {
 		String[] output = sol.solution(input1,input2,input3);
 		for(String s : output) System.out.println(s);
 	}
-
 }
 
 class Solution {
