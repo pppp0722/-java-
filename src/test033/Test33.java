@@ -1,5 +1,6 @@
 package test033;
 // 프로그래머스/Level1/최대공약수와 최소공배수
+
 public class Test33 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
