@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.Iterator;
 // 프로그래머스/Level1/3진법 뒤집기
 public class Test10 {
-
 	public static void main(String[] args) {
 		Solution sol = new Solution();
 		int input1 = 125;
@@ -12,7 +11,6 @@ public class Test10 {
 		System.out.println(output);
 
 	}
-
 }
 
 class Solution {
