@@ -1,5 +1,6 @@
 package test051;
 // 프로그래머스 Level1 부족한 금액 계산하기
+
 public class Test51 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
