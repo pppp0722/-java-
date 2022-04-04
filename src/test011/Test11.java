@@ -1,16 +1,13 @@
 package test011;
 // 프로그래머스/Level1/2016년
 public class Test11 {
-
 	public static void main(String[] args) {
 		Solution sol = new Solution();
 		int input1 = 5;
 		int input2 = 24;
 		String output = sol.solution(input1,input2);
 		System.out.println(output);
-
 	}
-
 }
 
 class Solution {
