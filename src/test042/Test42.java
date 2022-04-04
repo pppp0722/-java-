@@ -1,5 +1,6 @@
 package test042;
 // ICT 인턴쉽 코딩테스트 1번 문제
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
