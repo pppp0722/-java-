@@ -2,6 +2,7 @@ package test048;
 import java.util.Arrays;
 import java.util.Stack;
 // 프로그래머스/Level3/표 편집
+
 public class Test48 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
