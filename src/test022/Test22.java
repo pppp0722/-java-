@@ -1,7 +1,6 @@
 package test022;
 // 프로그래머스/Level1/수박수박수박수박수박수?
 public class Test22 {
-
 	public static void main(String[] args) {
 		Solution sol = new Solution();
 		int input = 3;
