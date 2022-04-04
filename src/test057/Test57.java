@@ -1,5 +1,6 @@
 package test057;
 // 프로그래머스 Level2 카카오프렌즈 컬러링북
+
 public class Test57 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
