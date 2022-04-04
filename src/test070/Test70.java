@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
 public class Test70 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
