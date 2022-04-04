@@ -1,7 +1,6 @@
 package test019;
 // 프로그래머스/Level1/문자열 다루기 기본
 public class Test19 {
-
 	public static void main(String[] args) {
 		Solution sol = new Solution();
 		String input = "a234";
