@@ -1,5 +1,6 @@
 package test025;
 // 프로그래머스/Level1/약수의 합
+
 public class Test25 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
