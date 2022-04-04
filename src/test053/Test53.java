@@ -1,5 +1,4 @@
 package test053;
-
 // 프로그래머스 Level1 최소 직사각형
 public class Test53 {
 	public static void main(String[] args) {
