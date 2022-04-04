@@ -1,7 +1,6 @@
 package test020;
 // 프로그래머스/Level1/서울에서 김서방 찾기
 public class Test20 {
-
 	public static void main(String[] args) {
 		Solution sol = new Solution();
 		String[] input = {"Jane","Kim"};
