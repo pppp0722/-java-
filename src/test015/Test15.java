@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 // 프로그래머스/Level1/나누어 떨어지는 숫자 배열
 public class Test15 {
-
 	public static void main(String[] args) {
 		Solution sol = new Solution();
 		int[] input1 = {5,9,7,10};
