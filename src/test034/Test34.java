@@ -1,5 +1,6 @@
 package test034;
 // 프로그래머스/Level1/콜라츠 추측
+
 public class Test34 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
