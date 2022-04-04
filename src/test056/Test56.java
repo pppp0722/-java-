@@ -3,6 +3,7 @@ package test056;
 import java.util.ArrayList;
 import java.util.HashMap;
 // 프로그래머스 Level2 오픈채팅방
+
 public class Test56 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
