@@ -1,5 +1,6 @@
 package test059;
 // 프로그래머스 Level2 124 나라의 숫자
+
 public class Test59 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
