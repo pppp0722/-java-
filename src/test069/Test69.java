@@ -1,6 +1,5 @@
 package test069;
 // 프로그래머스 Level2 위장
-
 import java.util.HashMap;
 
 public class Test69 {
