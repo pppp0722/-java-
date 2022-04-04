@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 // 프로그래머스 데브코스 코딩테스트 2번 문제
-
 public class Test66 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
