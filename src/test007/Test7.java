@@ -2,7 +2,6 @@ package test007;
 import java.util.ArrayList;
 // 프로그래머스/Level1/폰켓몬
 public class Test7 {
-
 	public static void main(String[] args) {
 		Solution sol = new Solution();
 		int[] input = {3,3,3,2,2,4};
@@ -10,7 +9,6 @@ public class Test7 {
 		System.out.println(output);
 
 	}
-
 }
 
 class Solution {
