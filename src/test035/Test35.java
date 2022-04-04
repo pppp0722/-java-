@@ -1,5 +1,6 @@
 package test035;
 // 프로그래머스/Level1/평균 구하기
+
 public class Test35 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
