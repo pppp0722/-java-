@@ -1,12 +1,10 @@
 package test005;
 // 프로그래머스/Level1/음양 더하기
 public class Test5 {
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 	}
-
 }
 
 class Solution {
