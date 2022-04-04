@@ -1,7 +1,6 @@
 package test008;
 // 프로그래머스/Level1/약수의 개수와 덧셈
 public class Test8 {
-
 	public static void main(String[] args) {
 		Solution sol = new Solution();
 		int input1 = 13;
@@ -9,7 +8,6 @@ public class Test8 {
 		int output = sol.solution(input1, input2);
 		System.out.println(output);
 	}
-
 }
 
 class Solution {
