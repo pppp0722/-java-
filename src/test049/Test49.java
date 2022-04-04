@@ -1,5 +1,4 @@
 package test049;
-
 // 프로그래머스 Level1 숫자 문자열과 영단어
 public class Test49 {
 	public static void main(String[] args) {
