@@ -2,7 +2,6 @@ package test009;
 import java.util.Arrays;
 // 프로그래머스/Level1/예산
 public class Test9 {
-
 	public static void main(String[] args) {
 		Solution sol = new Solution();
 		int[] input1 = {1,3,2,5,4};
@@ -10,7 +9,6 @@ public class Test9 {
 		int output = sol.solution(input1, input2);
 		System.out.println(output);
 	}
-
 }
 
 class Solution {
