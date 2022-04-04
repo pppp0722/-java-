@@ -1,5 +1,6 @@
 package test062;
 // 프로그래머스 Level2 타겟 넘버
+
 public class Test62 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
