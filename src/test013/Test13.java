@@ -2,7 +2,6 @@ package test013;
 import java.util.ArrayList;
 // 프로그래머스/Level1/[1차] 다트 게임
 public class Test13 {
-
 	public static void main(String[] args) {
 		Solution sol = new Solution();
 		String input1 = "1D#2S*3S";
