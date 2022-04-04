@@ -1,5 +1,6 @@
 package test055;
 // 프로그래머스 Level2 문자열 압축
+
 public class Test55 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
