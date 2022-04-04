@@ -1,5 +1,6 @@
 package test047;
 // ICT 인턴쉽 코딩테스트 6번 문제
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
