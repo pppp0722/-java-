@@ -3,7 +3,7 @@ package test001;
 public class Test1 {
 		public static void main(String[] args) {
 			Solution sol = new Solution();
-			int[] input = {2,1,6,2,2,4,3,3};
+			int[] input = {2, 1, 6, 2, 2, 4, 3, 3};
 			int[] output = sol.solution(5, input);
 			for(int i : output) System.out.println(i);
 		}
