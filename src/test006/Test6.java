@@ -9,7 +9,6 @@ public class Test6 {
 		String output = sol.solution(input1, input2);
 		System.out.println(output);
 	}
-
 }
 
 class Solution {
