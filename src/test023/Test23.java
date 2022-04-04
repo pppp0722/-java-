@@ -1,5 +1,6 @@
 package test023;
 // 프로그래머스/Level1/문자열을 정수로 바꾸기
+
 public class Test23 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
