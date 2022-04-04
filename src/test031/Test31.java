@@ -1,6 +1,7 @@
 package test031;
 import java.util.ArrayList;
 // 프로그래머스/Level1/제일 작은 수 제거하기
+
 public class Test31 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
