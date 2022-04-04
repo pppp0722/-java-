@@ -1,7 +1,6 @@
 package test017;
 // 프로그래머스/Level1/문자열 내 p와 y의 개수
 public class Test17 {
-
 	public static void main(String[] args) {
 		Solution sol = new Solution();
 		String input = "pPoooyY";
