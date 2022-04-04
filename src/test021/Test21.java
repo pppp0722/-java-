@@ -1,7 +1,6 @@
 package test021;
 // 프로그래머스/Level1/소수 찾기
 public class Test21 {
-	
 	public static void main(String[] args) {
 		Solution sol = new Solution();
 		int input = 10;
