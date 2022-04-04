@@ -1,6 +1,7 @@
 package test028;
 import java.util.ArrayList;
 // 프로그래머스/Level1/자연수 뒤집어 배열로 만들기
+
 public class Test28 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
