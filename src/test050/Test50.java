@@ -1,5 +1,4 @@
 package test050;
-
 // 프로그래머스 Level1 신고 결과 받기
 public class Test50 {
 	public static void main(String[] args) {
