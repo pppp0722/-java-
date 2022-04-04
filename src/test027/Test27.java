@@ -1,5 +1,6 @@
 package test027;
 // 프로그래머스/Level1/자릿수 더하기
+
 public class Test27 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
