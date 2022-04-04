@@ -2,6 +2,7 @@ package test029;
 import java.util.ArrayList;
 import java.util.Collections;
 // 프로그래머스/Level1/정수 내림차순으로 배치하기
+
 public class Test29 {
 	public static void main(String[] args) {
 		Solution sol = new Solution();
