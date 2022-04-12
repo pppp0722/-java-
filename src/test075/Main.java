@@ -6,6 +6,7 @@ package test075;
 import java.util.Scanner;
 
 public class Main {
+
     static int length;
     static int[] numArr;
     static boolean[] visited;
