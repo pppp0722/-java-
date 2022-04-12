@@ -1,6 +1,7 @@
 package test075;
 
 // 백준/3등급/10974번 모든순열
+// Backtracking
 
 import java.util.Scanner;
 
