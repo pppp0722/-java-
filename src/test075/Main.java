@@ -16,11 +16,11 @@ public class Main {
         visited = new boolean[length];
         numArr = new int[length];
 
-        backTracking(0);
+        backtracking(0);
         System.out.print(stringBuilder.toString());
     }
 
-    public static void backTracking(int depth) {
+    public static void backtracking(int depth) {
         if(depth == length) {
             for(int num : numArr)
                 stringBuilder.append(num + " ");
@@ -34,7 +34,7 @@ public class Main {
 
             visited[i] = true;
             numArr[depth] = i + 1;
-            backTracking(depth + 1);
+            backtracking(depth + 1);
             visited[i] = false;
         }
     }
