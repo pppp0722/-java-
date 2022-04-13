@@ -1,6 +1,6 @@
 package test076;
 
-// 백준/골드5/1759 암호 만들기
+// 백준/골드5/1759번 암호 만들기
 // Backtracking
 
 import java.util.Arrays;
