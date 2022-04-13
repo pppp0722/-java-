@@ -25,7 +25,7 @@ public class Main {
     public static void backtracking(int depth) {
         if(depth == length) {
             for(int num : numArr)
-                stringBuilder.append(num + " ");
+                stringBuilder.append(num).append(" ");
             stringBuilder.append("\n");
 
             return;
