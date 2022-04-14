@@ -27,7 +27,7 @@ public class Main {
         numOfAlphabets = Integer.parseInt(input1[1]);
         alphabets = new char[numOfAlphabets];
         visited = new boolean[numOfAlphabets];
-        for(int i = 0; i < numOfAlphabets; i++) {
+        for (int i = 0; i < numOfAlphabets; i++) {
             alphabets[i] = input2[i].charAt(0);
         }
 
@@ -38,28 +38,30 @@ public class Main {
     }
 
     public static void backtracking(int depth) {
-        if(depth == length) {
+        if (depth == length) {
             int numOfVowels = 0;
             String newPassword = "";
             for (char alphabet : password) {
-                if(Arrays.stream(vowels).anyMatch(c -> c == alphabet)) {
+                if (Arrays.stream(vowels).anyMatch(c -> c == alphabet)) {
                     numOfVowels++;
                 }
 
                 newPassword += alphabet;
             }
 
-            if(numOfVowels > 0 && length - numOfVowels > 1) {
+            if (numOfVowels > 0 && length - numOfVowels > 1) {
                 stringBuilder.append(newPassword).append("\n");
             }
 
             return;
         }
 
-        for(int i = 0; i < numOfAlphabets; i++) {
-            if(visited[i]) continue;
+        for (int i = 0; i < numOfAlphabets; i++) {
+            if (visited[i]) {
+                continue;
+            }
 
-            if(depth > 0 && alphabets[i] <= password[depth - 1]) {
+            if (depth > 0 && alphabets[i] <= password[depth - 1]) {
                 continue;
             }
 
