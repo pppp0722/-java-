@@ -44,11 +44,11 @@ class Solution {
         }
 
         for (int[] edge : gEdges) {
-            boolean[] nextVisited = new boolean[visited.length];
-            for (int i = 0; i < visited.length; i++) {
-                nextVisited[i] = visited[i];
-            }
             if (visited[edge[0]] && !visited[edge[1]]) {
+                boolean[] nextVisited = new boolean[visited.length];
+                for (int i = 0; i < visited.length; i++) {
+                    nextVisited[i] = visited[i];
+                }
                 dfs(edge[1], nextVisited, sheepCnt, wolfCnt);
             }
         }
