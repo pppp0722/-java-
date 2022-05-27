@@ -32,8 +32,10 @@ class Solution {
         }
         List<String> keySetList = new ArrayList<>(map.keySet());
         List<String> answer = new ArrayList<>();
-        for (String key : keySetList) {
-            if(map.get(key) < 2) {
+        for (int i = 0; i < keySetList.size(); i++) {
+            String key = keySetList.get(i);
+            if (map.get(key) < 2) {
+                keySetList.remove(i--);
                 continue;
             }
             for (int courseLength : course) {
