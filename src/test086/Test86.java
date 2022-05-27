@@ -23,12 +23,11 @@ public class Test86 {
 
 class Solution {
 
-    Map<String, Integer> map = new HashMap<>();
-
     public String[] solution(String[] orders, int[] course) {
+        Map<String, Integer> map = new HashMap<>();
         for (String order : orders) {
             order = sortString(order);
-            dfs(new boolean[order.length()], order, 0, course);
+            dfs(new boolean[order.length()], order, 0, course, map);
         }
         List<String> keySetList = new ArrayList<>(map.keySet());
         for (int i = 0; i < keySetList.size(); i++) {
@@ -60,7 +59,8 @@ class Solution {
         return keySetList.toArray(new String[0]);
     }
 
-    public void dfs(boolean[] visited, String order, int depth, int[] course) {
+    public void dfs(boolean[] visited, String order, int depth, int[] course,
+        Map<String, Integer> map) {
         if (depth == order.length()) {
             String menu = "";
             for (int i = 0; i < order.length(); i++) {
@@ -82,9 +82,9 @@ class Solution {
             }
         } else {
             visited[depth] = true;
-            dfs(visited, order, depth + 1, course);
+            dfs(visited, order, depth + 1, course, map);
             visited[depth] = false;
-            dfs(visited, order, depth + 1, course);
+            dfs(visited, order, depth + 1, course, map);
         }
     }
 
