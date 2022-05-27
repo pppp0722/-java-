@@ -31,7 +31,6 @@ class Solution {
             dfs(new boolean[order.length()], order, 0, course);
         }
         List<String> keySetList = new ArrayList<>(map.keySet());
-        List<String> answer = new ArrayList<>();
         for (int i = 0; i < keySetList.size(); i++) {
             String key = keySetList.get(i);
             if (map.get(key) < 2) {
@@ -42,25 +41,23 @@ class Solution {
                 if (key.length() != courseLength) {
                     continue;
                 }
-                boolean isLargest = true;
-                for (int j = 0; j < answer.size(); j++) {
-                    if (answer.get(j).length() != courseLength) {
+                for (int j = 0; j < i; j++) {
+                    String preKey = keySetList.get(j);
+                    if (key.length() != preKey.length()) {
                         continue;
                     }
-                    if (map.get(key) > map.get(answer.get(j))) {
-                        answer.remove(j--);
-                    } else if (map.get(key) < map.get(answer.get(j))) {
-                        isLargest = false;
+                    if (map.get(key) < map.get(preKey)) {
+                        keySetList.remove(i--);
                         break;
+                    } else if (map.get(key) > map.get(preKey)) {
+                        keySetList.remove(j--);
+                        i--;
                     }
-                }
-                if (isLargest) {
-                    answer.add(key);
                 }
             }
         }
-        Collections.sort(answer);
-        return answer.toArray(new String[0]);
+        Collections.sort(keySetList);
+        return keySetList.toArray(new String[0]);
     }
 
     public void dfs(boolean[] visited, String order, int depth, int[] course) {
