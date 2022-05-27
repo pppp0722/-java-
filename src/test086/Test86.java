@@ -33,8 +33,11 @@ class Solution {
         List<String> keySetList = new ArrayList<>(map.keySet());
         List<String> answer = new ArrayList<>();
         for (String key : keySetList) {
+            if(map.get(key) < 2) {
+                continue;
+            }
             for (int courseLength : course) {
-                if (key.length() != courseLength || map.get(key) < 2) {
+                if (key.length() != courseLength) {
                     continue;
                 }
                 boolean isLargest = true;
