@@ -1,6 +1,5 @@
 package test089;
 // 백준/골드4/1939번 중량제한
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
