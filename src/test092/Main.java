@@ -142,6 +142,19 @@ public class Main {
         return matrix;
     }
 
+    public static int dirChange(int dir) {
+        switch (dir) {
+            case UP:
+                return LEFT;
+            case DOWN:
+                return RIGHT;
+            case LEFT:
+                return DOWN;
+            default:
+                return UP;
+        }
+    }
+
     public static void blizzard(int[][] matrix, int userIdx, int dir, int range) {
         for (int i = 1; i <= range; i++) {
             switch (dir) {
@@ -158,19 +171,6 @@ public class Main {
                     matrix[userIdx][userIdx + i] = 0;
                     break;
             }
-        }
-    }
-
-    public static int dirChange(int dir) {
-        switch (dir) {
-            case UP:
-                return LEFT;
-            case DOWN:
-                return RIGHT;
-            case LEFT:
-                return DOWN;
-            default:
-                return UP;
         }
     }
 
