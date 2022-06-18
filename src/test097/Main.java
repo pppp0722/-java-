@@ -41,7 +41,6 @@ public class Main {
     }
 
     public static int binarySearch(long num, long[] arr, int N) {
-        // lower bound: 처음으로 0 이상인 idx
         int l1 = 0;
         int r1 = N - 1;
         int m1;
