@@ -1,5 +1,5 @@
 package test114;
-// 백준/실버1/1149 RGB 거리
+// 백준/실버1/1149 RGB거리
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
