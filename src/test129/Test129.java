@@ -33,7 +33,7 @@ class Solution {
                 ct++;
             }
 
-            if (ct >= k) {
+            if (ct == k) {
                 return false;
             }
         }
