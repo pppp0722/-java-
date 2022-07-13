@@ -11,7 +11,7 @@ class Solution {
         this.k = k;
 
         int l = 1;
-        int r = 300_000_000;
+        int r = 200_000_001;
         while (l < r) {
             int m = (l + r) / 2;
             if (isPossible(m)) {
