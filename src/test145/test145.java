@@ -1,4 +1,4 @@
-package test155;
+package test145;
 // 프로그래머스/Level2/게임 맵 최단거리
 
 import java.util.LinkedList;
@@ -56,6 +56,6 @@ class Solution {
     }
 }
 
-public class Test155 {
+public class test145 {
 
 }
