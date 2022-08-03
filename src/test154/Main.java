@@ -9,16 +9,12 @@ import java.util.List;
 
 public class Main {
 
-    static int N;
-    static int M;
-    static int X;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] line = br.readLine().split(" ");
-        N = Integer.parseInt(line[0]);
-        M = Integer.parseInt(line[1]);
-        X = Integer.parseInt(line[2]);
+        int N = Integer.parseInt(line[0]);
+        int M = Integer.parseInt(line[1]);
+        int X = Integer.parseInt(line[2]);
         List<List<Edge>> graph = new ArrayList<>();
         for (int i = 0; i <= N; i++) {
             graph.add(new ArrayList<>());
