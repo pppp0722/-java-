@@ -17,35 +17,31 @@ public class Main {
         int N = Integer.parseInt(line[0]);
         int K = Integer.parseInt(line[1]);
 
-        int[] times = new int[MAX + 1];
-        for (int i = 0; i <= MAX; i++) {
-            times[i] = Integer.MAX_VALUE;
-        }
+        boolean[] visited = new boolean[MAX + 1];
         Queue<Point> q = new LinkedList<>();
         q.offer(new Point(N, 0));
 
-        int answer = 0;
+        int answer = -1;
 
         while (!q.isEmpty()) {
             Point p = q.poll();
             int x = p.getX();
             int time = p.getTime();
 
+            visited[x] = true;
+
             if (x == K) {
                 answer = time;
                 break;
             }
 
-            if (x != 0 && 2 * x <= MAX && time < times[2 * x]) {
-                times[2 * x] = time;
+            if (x != 0 && 2 * x <= MAX && !visited[2 * x]) {
                 q.offer(new Point(2 * x, time));
             }
-            if (x - 1 >= 0 && time + 1 < times[x - 1]) {
-                times[x - 1] = time + 1;
+            if (x - 1 >= 0 && !visited[x - 1]) {
                 q.offer(new Point(x - 1, time + 1));
             }
-            if (x + 1 <= MAX && time + 1 < times[x + 1]) {
-                times[x + 1] = time + 1;
+            if (x + 1 <= MAX && !visited[x + 1]) {
                 q.offer(new Point(x + 1, time + 1));
             }
         }
