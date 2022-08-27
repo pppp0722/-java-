@@ -10,18 +10,18 @@ class Notebook {
 
     public int rowLen;
     public int colLen;
-    public boolean[][] isEmpty;
+    public boolean[][] isFilled;
 
     public Notebook(int rowLen, int colLen) {
         this.rowLen = rowLen;
         this.colLen = colLen;
-        this.isEmpty = new boolean[rowLen][colLen];
+        this.isFilled = new boolean[rowLen][colLen];
     }
 
     public boolean isPossible(int x, int y, Sticker sticker) {
         for (int i = 0; i < sticker.rowLen; i++) {
             for (int j = 0; j < sticker.colLen; j++) {
-                if (sticker.matrix[i][j] == 1 && isEmpty[i + x][j + y]) {
+                if (sticker.matrix[i][j] == 1 && isFilled[i + x][j + y]) {
                     return false;
                 }
             }
@@ -34,7 +34,7 @@ class Notebook {
         for (int i = 0; i < sticker.rowLen; i++) {
             for (int j = 0; j < sticker.colLen; j++) {
                 if (sticker.matrix[i][j] == 1) {
-                    this.isEmpty[i + x][j + y] = true;
+                    this.isFilled[i + x][j + y] = true;
                 }
             }
         }
