@@ -31,6 +31,7 @@ class Solution {
                 map.get(path[1]).add(new Edge(path[0], path[2]));
             }
         }
+
         int[] answer = {Integer.MAX_VALUE, Integer.MAX_VALUE};
         boolean[] visited = new boolean[n + 1];
         int[] intensity = new int[n + 1];
@@ -49,7 +50,9 @@ class Solution {
                     idx = j;
                 }
             }
+
             visited[idx] = true;
+
             for (Edge edge : map.get(idx)) {
                 if (intensity[edge.to] > Math.max(intensity[idx], edge.w)) {
                     intensity[edge.to] = Math.max(intensity[idx], edge.w);
@@ -64,6 +67,7 @@ class Solution {
                 answer[1] = intensity[summit];
             }
         }
+
         return answer;
     }
 }
