@@ -15,7 +15,7 @@ public class Main {
         for (int i = 0; i < t; i++) {
             int n = Integer.parseInt(br.readLine());
 
-            int[] dp = new int[n + 1];
+            long[] dp = new long[n + 1];
             dp[1] = 1;
             if (n >= 2) {
                 dp[2] = 2;
