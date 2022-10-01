@@ -9,41 +9,41 @@ public class Main {
 
     static int N;
     static int[] queens;
-    static int result = 0;
+    static int answer = 0;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
-        queens = new int[N];
+        queens = new int[N + 1];
 
-        backtrack(0);
+        backtrack(1);
 
-        System.out.println(result);
+        System.out.println(answer);
     }
 
-    static void backtrack(int row) {
-        if (row == N) {
-            result++;
-
+    public static void backtrack(int r) {
+        if (r == N + 1) {
+            answer++;
             return;
         }
 
-        for (int i = 0; i < N; i++) {
-            queens[row] = i;
-
-            if (isSafe(row)) {
-                backtrack(row + 1);
+        // columns
+        for (int i = 1; i <= N; i++) {
+            if (queens[r] == 0 && isSafe(r, i)) {
+                queens[r] = i;
+                backtrack(r + 1);
+                queens[r] = 0;
             }
         }
     }
 
-    static boolean isSafe(int row) {
-        for (int i = 0; i < row; i++) {
-            if (queens[i] == queens[row]) {
-                return false;
-            }
+    public static boolean isSafe(int r, int c) {
+        // rows
+        for (int i = 1; i < r; i++) {
+            int opR = i;
+            int opC = queens[i];
 
-            if (Math.abs(i - row) == Math.abs(queens[i] - queens[row])) {
+            if (c == opC || Math.abs(r - opR) == Math.abs(c - opC)) {
                 return false;
             }
         }
