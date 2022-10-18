@@ -12,7 +12,6 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         int[][] dArr = new int[NUM_OF_GEARS][NUM_OF_SAWS];
         for (int i = 0; i < NUM_OF_GEARS; i++) {
             String line = br.readLine();
@@ -23,61 +22,38 @@ public class Main {
 
         int k = Integer.parseInt(br.readLine());
         for (int i = 0; i < k; i++) {
-            String[] line = br.readLine().split(" ");
-            int num = Integer.parseInt(line[0]);
-            int dir = Integer.parseInt(line[1]);
+            String[] split = br.readLine().split(" ");
+            int num = Integer.parseInt(split[0]) - 1;
+            int dir = Integer.parseInt(split[1]);
 
-            rotate(dArr, num, dir);
+            operate(dArr, num, dir);
         }
 
-        int answer = 0;
-        for (int i = 0; i < NUM_OF_GEARS; i++) {
-            if (dArr[i][0] == 1) {
-                answer += Math.pow(2, i);
-            }
-        }
-
-        System.out.println(answer);
+        System.out.println(getAnswer(dArr));
     }
 
-    public static void rotate(int[][] dArr, int num, int dir) {
-        int[] arr = dArr[num - 1];
-        int l = arr[6];
-        int r = arr[2];
+    public static void operate(int[][] dArr, int num, int dir) {
+        leftRotate(dArr, num - 1, -dir);
+        rightRotate(dArr, num + 1, -dir);
+        shift(dArr[num], dir);
+    }
 
-        int curNum = num - 2;
-        int curL = l;
-        int curDir = dir;
-        while (curNum >= 0) {
-            int[] lArr = dArr[num - 2];
-
-            if (curL == lArr[2]) {
-                break;
-            }
-            curL = lArr[6];
-
-            shift(lArr, getOppDir(curDir));
-            curDir = getOppDir(curDir);
-            curNum--;
+    public static void leftRotate(int[][] dArr, int num, int dir) {
+        if (num < 0 || dArr[num][2] == dArr[num + 1][6]) {
+            return;
         }
 
-        curNum = num;
-        int curR = r;
-        curDir = dir;
-        while (curNum < NUM_OF_GEARS) {
-            int[] rArr = dArr[curNum];
+        leftRotate(dArr, num - 1, -dir);
+        shift(dArr[num], dir);
+    }
 
-            if (curR == rArr[6]) {
-                break;
-            }
-            curR = rArr[2];
-
-            shift(rArr, getOppDir(curDir));
-            curDir = getOppDir(curDir);
-            curNum++;
+    public static void rightRotate(int[][] dArr, int num, int dir) {
+        if (num >= NUM_OF_GEARS || dArr[num][6] == dArr[num - 1][2]) {
+            return;
         }
 
-        shift(arr, dir);
+        rightRotate(dArr, num + 1, -dir);
+        shift(dArr[num], dir);
     }
 
     public static void shift(int[] arr, int dir) {
@@ -96,7 +72,14 @@ public class Main {
         }
     }
 
-    public static int getOppDir(int dir) {
-        return dir * -1;
+    public static int getAnswer(int[][] dArr) {
+        int answer = 0;
+        for (int i = 0; i < NUM_OF_GEARS; i++) {
+            if (dArr[i][0] == 1) {
+                answer += Math.pow(2, i);
+            }
+        }
+
+        return answer;
     }
 }
