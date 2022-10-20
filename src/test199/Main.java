@@ -35,19 +35,20 @@ public class Main {
         int v1 = Integer.parseInt(line[0]);
         int v2 = Integer.parseInt(line[1]);
 
+        int v1ToV2 = dijkstra(v1, v2);
         int oneToV1 = dijkstra(1, v1);
-        int v1ToN = dijkstra(v1, n);
-        int oneToV2 = dijkstra(1, v2);
         int v2ToN = dijkstra(v2, n);
+        int oneToV2 = dijkstra(1, v2);
+        int v1ToN = dijkstra(v1, n);
 
-        System.out.println(getAnswer(oneToV1, v1ToN, oneToV2, v2ToN));
+        System.out.println(getAnswer(v1ToV2, oneToV1, v2ToN, oneToV2, v1ToN));
     }
 
     public static int dijkstra(int start, int end) {
-        PriorityQueue<Edge> pq = new PriorityQueue<>();
         int[] dist = new int[n + 1];
         Arrays.fill(dist, Integer.MAX_VALUE);
         dist[start] = 0;
+        PriorityQueue<Edge> pq = new PriorityQueue<>();
         pq.offer(new Edge(start, 0));
 
         while (!pq.isEmpty()) {
@@ -70,19 +71,23 @@ public class Main {
         return dist[end];
     }
 
-    public static int getAnswer(int oneToV1, int v1ToN, int oneToV2, int v2ToN) {
+    public static int getAnswer(int v1ToV2, int oneToV1, int v2ToN, int oneToV2, int v1ToN) {
+        if (v1ToV2 == Integer.MAX_VALUE) {
+            return -1;
+        }
+
         int dist1;
-        if (oneToV1 == Integer.MAX_VALUE || v1ToN == Integer.MAX_VALUE) {
+        if (oneToV1 == Integer.MAX_VALUE || v2ToN == Integer.MAX_VALUE) {
             dist1 = Integer.MAX_VALUE;
         } else {
-            dist1 = oneToV1 + v1ToN;
+            dist1 = oneToV1 + v1ToV2 + v2ToN;
         }
 
         int dist2;
         if (oneToV2 == Integer.MAX_VALUE || v2ToN == Integer.MAX_VALUE) {
             dist2 = Integer.MAX_VALUE;
         } else {
-            dist2 = oneToV2 + v2ToN;
+            dist2 = oneToV2 + v1ToV2 + v1ToN;
         }
 
         return dist1 == Integer.MAX_VALUE && dist2 == Integer.MAX_VALUE ? -1
