@@ -15,20 +15,21 @@ public class Main {
     private static int[] dx = {-1, 0, 1, 0};
     private static int[] dy = {0, 1, 0, -1};
 
-    // 2개
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] line = br.readLine().split(" ");
-        int m = Integer.parseInt(line[0]); // row 수
-        int n = Integer.parseInt(line[1]); // column 수
-        int k = Integer.parseInt(line[2]); // 사각형 수
-        boolean[][] visited = new boolean[m][n];
+        String[] splitLine = br.readLine().split(" ");
+        int m = Integer.parseInt(splitLine[0]);
+        int n = Integer.parseInt(splitLine[1]);
+        int k = Integer.parseInt(splitLine[2]);
+        boolean[][] visited = new boolean[n][m];
+
         for (int i = 0; i < k; i++) {
-            line = br.readLine().split(" ");
-            int y1 = Integer.parseInt(line[0]);
-            int x1 = Integer.parseInt(line[1]);
-            int y2 = Integer.parseInt(line[2]);
-            int x2 = Integer.parseInt(line[3]);
+            splitLine = br.readLine().split(" ");
+            int x1 = Integer.parseInt(splitLine[0]);
+            int y1 = Integer.parseInt(splitLine[1]);
+            int x2 = Integer.parseInt(splitLine[2]);
+            int y2 = Integer.parseInt(splitLine[3]);
+
             for (int x = x1; x < x2; x++) {
                 for (int y = y1; y < y2; y++) {
                     visited[x][y] = true;
@@ -36,59 +37,51 @@ public class Main {
             }
         }
 
-        int answer1 = 0;
-        List<Integer> answer2 = new ArrayList<>();
+        int numOfEmptyAreas = 0;
+        List<Integer> sizesOfEmptyAreas = new ArrayList<>();
 
-        for (int y = 0; y < n; y++) {
-            for (int x = m - 1; x >= 0; x--) {
+        for (int x = 0; x < n; x++) {
+            for (int y = 0; y < m; y++) {
                 if (visited[x][y]) {
                     continue;
                 }
 
-                answer1++;
-                int ct = 0;
-
-                Queue<Point> q = new LinkedList<>();
-                q.offer(new Point(x, y));
+                numOfEmptyAreas++;
+                Queue<int[]> q = new LinkedList<>();
+                q.offer(new int[]{x, y});
                 visited[x][y] = true;
+                int sizeOfEmptyArea = 0;
 
                 while (!q.isEmpty()) {
-                    Point cp = q.poll();
-                    ct++;
+                    sizeOfEmptyArea++;
+                    int[] cp = q.poll();
+                    int cx = cp[0];
+                    int cy = cp[1];
 
                     for (int i = 0; i < 4; i++) {
-                        int nx = cp.x + dx[i];
-                        int ny = cp.y + dy[i];
+                        int nx = cx + dx[i];
+                        int ny = cy + dy[i];
 
-                        if (nx < 0 || nx >= m || ny < 0 || ny >= n
-                            || visited[nx][ny]) {
+                        if (nx < 0 || nx >= n || ny < 0 || ny >= m || visited[nx][ny]) {
                             continue;
                         }
 
-                        q.offer(new Point(nx, ny));
+                        q.offer(new int[]{nx, ny});
                         visited[nx][ny] = true;
                     }
                 }
 
-                answer2.add(ct);
+                sizesOfEmptyAreas.add(sizeOfEmptyArea);
             }
         }
 
-        System.out.println(answer1);
-        Collections.sort(answer2);
-        for (int i : answer2) {
-            System.out.print(i + " ");
+        Collections.sort(sizesOfEmptyAreas);
+        StringBuilder sb = new StringBuilder();
+        for (int sizeOfEmptyArea : sizesOfEmptyAreas) {
+            sb.append(sizeOfEmptyArea).append(" ");
         }
-    }
-}
 
-class Point {
-
-    int x;
-    int y;
-
-    public Point(int x, int y) {
-        this.x = x;
-        this.y = y;
+        System.out.println(numOfEmptyAreas);
+        System.out.println(sb);
     }
 }
