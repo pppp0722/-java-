@@ -1,4 +1,5 @@
 package test204;
+// 다익/백준/골드5/1916 최소비용 구하기
 
 import java.io.BufferedReader;
 import java.io.IOException;
