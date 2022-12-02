@@ -1,5 +1,5 @@
 package test201;
-// 백준/실버1/2583 영역 구하기
+// BFS/백준/실버1/2583 영역 구하기
 
 import java.io.BufferedReader;
 import java.io.IOException;
