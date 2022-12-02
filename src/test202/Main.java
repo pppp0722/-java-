@@ -1,5 +1,5 @@
 package test202;
-// 백준/실버2/1260 DFS와 BFS
+// 완탐/백준/실버2/1260 DFS와 BFS
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class Main {
 
         boolean[][] adj = new boolean[n + 1][n + 1];
 
-        for(int i = 0; i < m; i++) {
+        for (int i = 0; i < m; i++) {
             line = br.readLine().split(" ");
             int v1 = Integer.parseInt(line[0]);
             int v2 = Integer.parseInt(line[1]);
@@ -32,18 +32,18 @@ public class Main {
         boolean[] dfsVisited = new boolean[n + 1];
         stack.push(v);
 
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             int cv = stack.pop();
 
-            if(dfsVisited[cv]) {
+            if (dfsVisited[cv]) {
                 continue;
             }
 
             dfsVisited[cv] = true;
             dfsPath.append(cv).append(" ");
 
-            for(int nv = n; nv >= 1; nv--) {
-                if(!adj[cv][nv] || dfsVisited[nv]) {
+            for (int nv = n; nv >= 1; nv--) {
+                if (!adj[cv][nv] || dfsVisited[nv]) {
                     continue;
                 }
 
@@ -57,12 +57,12 @@ public class Main {
         q.offer(v);
         bfsVisited[v] = true;
 
-        while(!q.isEmpty()) {
+        while (!q.isEmpty()) {
             int cv = q.poll();
             bfsPath.append(cv).append(" ");
 
-            for(int nv = 1; nv <= n; nv++) {
-                if(!adj[cv][nv] || bfsVisited[nv]) {
+            for (int nv = 1; nv <= n; nv++) {
+                if (!adj[cv][nv] || bfsVisited[nv]) {
                     continue;
                 }
 
