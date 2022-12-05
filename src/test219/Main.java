@@ -1,5 +1,5 @@
 package test219;
-// 트리/백준/실버2/11725 트리의 부모 찾기
+// DFS/백준/실버2/11725 트리의 부모 찾기
 
 import static java.lang.System.lineSeparator;
 
