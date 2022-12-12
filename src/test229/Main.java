@@ -1,5 +1,5 @@
 package test229;
-// 투포/백준/실버4/2003 수들의 합 2
+// 누합,투포/백준/실버4/2003 수들의 합 2
 
 import java.io.BufferedReader;
 import java.io.IOException;
