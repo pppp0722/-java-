@@ -1,5 +1,5 @@
 package test232;
-// DFS/백준/골드4/14267 회사 문화 1
+// 그래프,DFS,DP/백준/골드4/14267 회사 문화 1
 
 import java.io.BufferedReader;
 import java.io.IOException;
