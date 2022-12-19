@@ -1,5 +1,5 @@
 package test238;
-// 이진검색트리/백준/골드4/21939 문제 추천 시스템 Version 1
+// 이탐트리/백준/골드4/21939 문제 추천 시스템 Version 1
 
 import static java.lang.System.lineSeparator;
 
