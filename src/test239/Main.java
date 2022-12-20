@@ -38,13 +38,13 @@ public class Main {
                     fiveCt++;
                 }
                 if (cur > 5) {
-                    if ((n2 / 10) % 10 == 4 && fiveCt == k - 1) {
+                    long n3 = n2 / 10;
+                    if (n3 % 10 == 4 && fiveCt == k - 1) {
                         cur = 0;
                     } else {
                         cur = 5;
                         fiveCt++;
                     }
-                    long n3 = n2 / 10;
                     while ((n3 % 10) == 9) {
                         n3 /= 10;
                     }
@@ -59,6 +59,9 @@ public class Main {
             }
             stack.push(String.valueOf(cur));
             n2 /= 10;
+        }
+        for (int i = fiveCt; i < k; i++) {
+            stack.push("5");
         }
 
         // 출력
