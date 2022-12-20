@@ -17,11 +17,11 @@ public class Main {
         int k = Integer.parseInt(st.nextToken());
 
         // 현재 숫자 5 개수 계산
-        int fiveCt = 0;
+        int ct = 0;
         long n1 = n;
         while (n1 > 0) {
             if (n1 % 10 == 5) {
-                fiveCt++;
+                ct++;
             }
             n1 /= 10;
         }
@@ -32,27 +32,27 @@ public class Main {
         long n2 = n;
         while (n2 > 0) {
             long cur = n2 % 10;
-            if (fiveCt < k) {
+            if (ct < k) {
                 if (cur < 5) {
                     cur = 5;
-                    fiveCt++;
+                    ct++;
                 }
                 if (cur > 5) {
                     long n3 = n2 / 10;
-                    if (n3 % 10 == 4 && fiveCt == k - 1) {
+                    if (n3 % 10 == 4 && ct == k - 1) {
                         cur = 0;
                     } else {
                         cur = 5;
-                        fiveCt++;
+                        ct++;
                     }
-                    while ((n3 % 10) == 9) {
+                    while (n3 % 10 == 9) {
                         n3 /= 10;
                     }
                     if (n3 % 10 == 4) {
-                        fiveCt++;
+                        ct++;
                     }
                     if (n3 % 10 == 5) {
-                        fiveCt--;
+                        ct--;
                     }
                     n2 += 10;
                 }
@@ -60,7 +60,7 @@ public class Main {
             stack.push(String.valueOf(cur));
             n2 /= 10;
         }
-        for (int i = fiveCt; i < k; i++) {
+        for (int i = ct; i < k; i++) {
             stack.push("5");
         }
 
