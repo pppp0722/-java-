@@ -4,70 +4,78 @@ package test239;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class Main {
 
+    private static final char FIVE = '5';
+    private static StringBuilder n;
+    private static int k;
+
     public static void main(String[] args) throws IOException {
-        // 초기화
+        init();
+        backtrack(0, false);
+        addRemaining();
+        System.out.println(new StringBuilder(n).reverse());
+    }
+
+    private static void init() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        long n = Long.parseLong(st.nextToken()) + 1;
-        int k = Integer.parseInt(st.nextToken());
+        n = new StringBuilder(String.valueOf(Long.parseLong(st.nextToken()) + 1))
+            .reverse();
+        k = Integer.parseInt(st.nextToken());
+        br.close();
+    }
 
-        // 현재 숫자 5 개수 계산
+    private static void backtrack(int idx, boolean flag) {
+        if (idx >= n.length() || count() >= k) {
+            return;
+        }
+
+        if (flag) {
+            n.setCharAt(idx - 1, FIVE);
+        }
+
+        if (count() >= k) {
+            return;
+        }
+
+        if (n.charAt(idx) < FIVE) {
+            n.setCharAt(idx, FIVE);
+            backtrack(idx + 1, false);
+        } else if (n.charAt(idx) > FIVE) {
+            n.setCharAt(idx, '0');
+            roundUp(idx);
+            backtrack(idx + 1, true);
+        } else {
+            backtrack(idx + 1, false);
+        }
+    }
+
+    private static int count() {
         int ct = 0;
-        long n1 = n;
-        while (n1 > 0) {
-            if (n1 % 10 == 5) {
+        for (int i = 0; i < n.length(); i++) {
+            if (n.charAt(i) == FIVE) {
                 ct++;
             }
-            n1 /= 10;
         }
+        return ct;
+    }
 
-        // 일의 자리수부터 그리디
-        StringBuilder sb = new StringBuilder();
-        Stack<String> stack = new Stack<>();
-        long n2 = n;
-        while (n2 > 0) {
-            long cur = n2 % 10;
-            if (ct < k) {
-                if (cur < 5) {
-                    cur = 5;
-                    ct++;
-                }
-                if (cur > 5) {
-                    long n3 = n2 / 10;
-                    if (n3 % 10 == 4 && ct == k - 1) {
-                        cur = 0;
-                    } else {
-                        cur = 5;
-                        ct++;
-                    }
-                    while (n3 % 10 == 9) {
-                        n3 /= 10;
-                    }
-                    if (n3 % 10 == 4) {
-                        ct++;
-                    }
-                    if (n3 % 10 == 5) {
-                        ct--;
-                    }
-                    n2 += 10;
-                }
-            }
-            stack.push(String.valueOf(cur));
-            n2 /= 10;
+    private static void roundUp(int idx) {
+        long add = 10;
+        for (int i = 0; i < idx; i++) {
+            add *= 10;
         }
+        n = new StringBuilder(String.valueOf(Long.parseLong(n.reverse().toString()) + add))
+            .reverse();
+    }
+
+    private static void addRemaining() {
+        int ct = count();
         for (int i = ct; i < k; i++) {
-            stack.push("5");
+            n.append(FIVE);
         }
-
-        // 출력
-        while (!stack.isEmpty()) {
-            sb.append(stack.pop());
-        }
-        System.out.println(sb);
     }
 }
