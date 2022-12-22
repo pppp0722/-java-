@@ -1,5 +1,5 @@
 package test239;
-// 그리디/백준/골드3/3165 5
+// 백트래킹/백준/골드3/3165 5
 
 import java.io.BufferedReader;
 import java.io.IOException;
