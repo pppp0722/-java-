@@ -45,7 +45,6 @@ public class Main {
             n.setCharAt(idx, FIVE);
             backtrack(idx + 1, false);
         } else if (n.charAt(idx) > FIVE) {
-            n.setCharAt(idx, '0');
             roundUp(idx);
             backtrack(idx + 1, true);
         } else {
@@ -64,6 +63,7 @@ public class Main {
     }
 
     private static void roundUp(int idx) {
+        n.setCharAt(idx, '0');
         long add = 10;
         for (int i = 0; i < idx; i++) {
             add *= 10;
