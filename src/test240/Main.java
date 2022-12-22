@@ -36,13 +36,13 @@ public class Main {
         int max = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                max = Math.max(getCurMax(i, j), max);
+                max = Math.max(findCurMax(i, j), max);
             }
         }
         return max;
     }
 
-    private static int getCurMax(int x, int y) {
+    private static int findCurMax(int x, int y) {
         int max = 0;
         int cur;
         // ㅣ 모양
