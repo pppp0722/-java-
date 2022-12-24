@@ -23,12 +23,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         init();
         Arrays.sort(arr);
-        dfs(0);
-        StringBuilder answer = new StringBuilder();
-        for(String s : set) {
-            answer.append(s).append(lineSeparator());
-        }
-        System.out.println(answer);
+        backtrack(0);
+        printAnswer();
     }
 
     private static void init() throws IOException {
@@ -48,7 +44,7 @@ public class Main {
         br.close();
     }
 
-    private static void dfs(int depth) {
+    private static void backtrack(int depth) {
         if (depth == m) {
             StringBuilder sb = new StringBuilder();
             for (int i : selected) {
@@ -65,8 +61,16 @@ public class Main {
 
             selected[depth] = arr[i];
             visited[i] = true;
-            dfs(depth + 1);
+            backtrack(depth + 1);
             visited[i] = false;
         }
+    }
+
+    private static void printAnswer() {
+        StringBuilder answer = new StringBuilder();
+        for (String s : set) {
+            answer.append(s).append(lineSeparator());
+        }
+        System.out.println(answer);
     }
 }
