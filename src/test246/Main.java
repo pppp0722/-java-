@@ -1,4 +1,4 @@
-package test247;
+package test246;
 // DP/백준/실버1/4883 삼각 그래프
 
 import static java.lang.System.lineSeparator;
