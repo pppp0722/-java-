@@ -12,10 +12,11 @@ import java.util.StringTokenizer;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        // 초기화
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         StringBuilder sb = new StringBuilder();
-        int n,  mid, left;
+        int n, mid, left;
         int[] heights;
         long answer;
         Stack<Integer> stack;
@@ -31,17 +32,19 @@ public class Main {
             for (int i = 0; i < n; i++) {
                 heights[i] = Integer.parseInt(st.nextToken());
             }
+
+            // Stack
+            answer = 0;
             heights[n] = -1;
             stack = new Stack<>();
             stack.push(-1);
-            answer = 0;
-            for (int i = 0; i < heights.length; i++) {
-                while (stack.size() > 1 && heights[i] < heights[stack.peek()]) {
+            for (int right = 0; right < heights.length; right++) {
+                while (stack.size() > 1 && heights[right] < heights[stack.peek()]) {
                     mid = stack.pop();
                     left = stack.peek();
-                    answer = Math.max(answer, (long) (i - left - 1) * heights[mid]);
+                    answer = Math.max((long) heights[mid] * (right - left - 1), answer);
                 }
-                stack.push(i);
+                stack.push(right);
             }
             sb.append(answer).append(lineSeparator());
         }
