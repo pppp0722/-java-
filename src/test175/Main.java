@@ -1,36 +1,47 @@
 package test175;
-// 백준/골드5/12865 평범한 배낭
+// DP/백준/골드5/12865 평범한 배낭
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        // 초기화
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] line = br.readLine().split(" ");
-        int n = Integer.parseInt(line[0]);
-        int k = Integer.parseInt(line[1]);
+        StringTokenizer st;
+        st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
         int[][] infos = new int[n + 1][2];
         for (int i = 1; i <= n; i++) {
-            line = br.readLine().split(" ");
-            int[] info = new int[]{Integer.parseInt(line[0]), Integer.parseInt(line[1])};
-            infos[i] = info;
+            st = new StringTokenizer(br.readLine());
+            infos[i][0] = Integer.parseInt(st.nextToken());
+            infos[i][1] = Integer.parseInt(st.nextToken());
         }
 
+        // DP
         int[][] dp = new int[n + 1][k + 1];
+        int w, v;
         for (int i = 1; i <= n; i++) {
-            int[] info = infos[i];
+            w = infos[i][0];
+            v = infos[i][1];
             for (int j = 1; j <= k; j++) {
-                if (j < info[0]) {
+                if (j < w) {
                     dp[i][j] = dp[i - 1][j];
                 } else {
-                    dp[i][j] = Math.max(dp[i - 1][j - info[0]] + info[1], dp[i - 1][j]);
+                    dp[i][j] = Math.max(dp[i - 1][j - w] + v, dp[i - 1][j]);
                 }
             }
         }
 
+        // 출력
         System.out.println(dp[n][k]);
     }
 }
