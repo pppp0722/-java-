@@ -34,11 +34,7 @@ public class Main {
                 break;
             }
 
-            while (!pq1.isEmpty()) {
-                if (curP < pq1.peek().d) {
-                    break;
-                }
-
+            while (!pq1.isEmpty() && pq1.peek().d <= curP) {
                 pq2.offer(pq1.poll());
             }
 
