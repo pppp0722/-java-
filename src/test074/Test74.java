@@ -37,7 +37,7 @@ class Solution {
             visited.put(word, false);
         }
 
-        backtrack(0, begin); // 재귀 시작
+        backtrack(0, begin);
 
         return minDepth == n ? 0 : minDepth;
     }
