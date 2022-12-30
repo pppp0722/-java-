@@ -1,4 +1,4 @@
-package test257;
+package test258;
 // 이탐,그리디/백준/골드1/1508 레이스
 
 import java.io.BufferedReader;
