@@ -1,11 +1,11 @@
 package test074;
+// 백트래킹/프로그래머스/Level3/단어 변환
 
 import java.util.HashMap;
 import java.util.Map;
 
-// 프로그래머스/Level3/단어 변환
-// DFS/BFS
 public class Test74 {
+
     public static void main(String[] args) {
         Solution solution = new Solution();
         String begin = "hit";
@@ -17,50 +17,59 @@ public class Test74 {
 }
 
 class Solution {
-    String targetWord;
-    String[] wordArray;
-    int minDepth;
+
+    private int n;
+    private int len;
+    private String targetWord;
+    private int minDepth;
+    private Map<String, Boolean> visited;
 
     public int solution(String begin, String target, String[] words) {
+        n = words.length;
+        len = begin.length();
         targetWord = target;
-        wordArray = words;
-        minDepth = words.length + 1;
-        Map<String, Boolean> visted = new HashMap<>();
-        visted.put(begin, false);
-        for(int i = 0; i < words.length; i++) {
-            visted.put(words[i], false);
+        minDepth = n;
+        visited = new HashMap<>();
+        for (String word : words) {
+            if (word.equals(begin)) {
+                continue;
+            }
+            visited.put(word, false);
         }
 
-        dfs(begin, visted, 0); // 재귀 시작
+        backtrack(0, begin); // 재귀 시작
 
-        return minDepth != words.length + 1 ? minDepth : 0;
+        return minDepth == n ? 0 : minDepth;
     }
 
-    public void dfs(String word, Map<String, Boolean> visted, int depth) {
-        visted.replace(word, true);
-
-        if(word.equals(targetWord)) {
-            if(depth < minDepth) minDepth = depth;
+    private void backtrack(int depth, String word) {
+        if (depth == minDepth) {
             return;
         }
 
-        for(int i = 0; i < wordArray.length; i++) {
-            String nextWord = wordArray[i];
-
-            if(visted.get(nextWord)) continue;
-
-            int matches = 0;
-            for(int j = 0; j < word.length(); j++) {
-                if(word.charAt(j) == nextWord.charAt(j)) matches++;
-            }
-            if(matches != word.length() - 1) continue;
-
-            Map<String, Boolean> newVisted = new HashMap<>();
-            for(Map.Entry<String, Boolean> entry : visted.entrySet()) {
-                newVisted.put(entry.getKey(), entry.getValue());
-            }
-
-            dfs(nextWord, newVisted,depth + 1);
+        if (word.equals(targetWord)) {
+            minDepth = depth;
+            return;
         }
+
+        for (String nextWord : visited.keySet()) {
+            if (visited.get(nextWord) || !check(word, nextWord)) {
+                continue;
+            }
+
+            visited.replace(word, true);
+            backtrack(depth + 1, nextWord);
+            visited.replace(word, false);
+        }
+    }
+
+    private boolean check(String word, String nextWord) {
+        int ct = 0;
+        for (int i = 0; i < len; i++) {
+            if (word.charAt(i) == nextWord.charAt(i)) {
+                ct++;
+            }
+        }
+        return ct == len - 1;
     }
 }
