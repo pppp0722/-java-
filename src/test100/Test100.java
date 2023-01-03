@@ -1,5 +1,5 @@
 package test100;
-// 프로그래머스/Level3/광고 삽입
+// 구현/프로그래머스/Level3/광고 삽입
 import java.util.Arrays;
 
 public class Test100 {
