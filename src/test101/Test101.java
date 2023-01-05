@@ -1,94 +1,103 @@
 package test101;
-// 프로그래머스/Level2/수식 최대화
+// 구현/프로그래머스/Level2/수식 최대화
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Stack;
-
-public class Test101 {
-
-    public static void main(String[] args) {
-        String expression = "100-200*300-500+20";
-        long result = new Solution().solution(expression);
-        System.out.println(result);
-    }
-}
 
 class Solution {
 
-    String exp;
-    long max = 0;
-    String[] operators = {"+", "-", "*"};
-    Map<String, Integer> priorities = new HashMap();
-    boolean[] visited = new boolean[3];
+    private long max;
+    private List<Long> expressionNums;
+    private List<Character> expressionOps;
+    private char[] ops;
+    private char[] priorities;
+
+    private boolean[] visited;
 
     public long solution(String expression) {
-        exp = expression;
+        init(expression);
         dfs(0);
-
         return max;
     }
 
-    void dfs(int depth) {
-        if (depth == 3) {
-            calc();
+    private void init(String expression) {
+        max = 0;
+        expressionNums = new ArrayList<>();
+        expressionOps = new ArrayList<>();
+        ops = new char[]{'+', '-', '*'};
+        priorities = new char[3];
+        visited = new boolean[3];
+        int idx = 0;
+        for (int i = 0; i < expression.length(); i++) {
+            char ch = expression.charAt(i);
+            if (ch == '+' || ch == '-' || ch == '*') {
+                expressionOps.add(ch);
+                expressionNums.add(Long.parseLong(expression.substring(idx, i)));
+                idx = i + 1;
+            }
+        }
+        expressionNums.add(Long.parseLong(expression.substring(idx)));
+    }
 
+    private void dfs(int depth) {
+        if (depth == 3) {
+            max = Math.max(Math.abs(calcExpression()), max);
             return;
         }
 
-        for (int i = 0; i < 3; i++) {
-            if (!visited[i]) {
-                priorities.put(operators[depth], i);
-                visited[i] = true;
-                dfs(depth + 1);
-                visited[i] = false;
+        for (int i = 0; i < ops.length; i++) {
+            if (visited[i]) {
+                continue;
             }
+
+            priorities[depth] = ops[i];
+            visited[i] = true;
+            dfs(depth + 1);
+            visited[i] = false;
         }
     }
 
-    void calc() {
-        String num = "";
-        List<String> list = new ArrayList<>();
-        Stack<String> stack = new Stack<>();
-        for (int i = 0; i < exp.length(); i++) {
-            char c = exp.charAt(i);
-            if (Character.isDigit(c)) {
-                num += c;
-            } else {
-                list.add(num);
-                num = "";
-                while (!stack.isEmpty() && priorities.get(String.valueOf(c)) >= priorities.get(
-                    stack.peek())) {
-                    list.add(stack.pop());
-                }
-                stack.push(String.valueOf(c));
+    private long calcExpression() {
+        List<Long> tmpExpressionNums = new ArrayList<>(expressionNums);
+        List<Character> tmpExpressionOps = new ArrayList<>(expressionOps);
+        while (tmpExpressionOps.size() > 0) {
+            int maxPriority = 0;
+            for (int i = 0; i < tmpExpressionOps.size(); i++) {
+                maxPriority = Math.max(getPriority(tmpExpressionOps.get(i)), maxPriority);
             }
-        }
-        list.add(num);
-        while (!stack.isEmpty()) {
-            list.add(stack.pop());
-        }
-
-        Stack<Long> stack1 = new Stack<>();
-        for (String s : list) {
-            if (!s.equals("+") && !s.equals("-") && !s.equals("*")) {
-                stack1.push(Long.parseLong(s));
-            } else {
-                long num1 = stack1.pop();
-                long num2 = stack1.pop();
-                if (s.equals("+")) {
-                    stack1.push(num2 + num1);
-                } else if (s.equals("-")) {
-                    stack1.push(num2 - num1);
-                } else {
-                    stack1.push(num2 * num1);
+            for (int i = 0; i < tmpExpressionOps.size(); i++) {
+                if (getPriority(tmpExpressionOps.get(i)) == maxPriority) {
+                    tmpExpressionNums.add(i,
+                        calc(tmpExpressionNums.remove(i), tmpExpressionNums.remove(i),
+                            tmpExpressionOps.remove(i)));
+                    break;
                 }
             }
         }
+        return tmpExpressionNums.get(0);
+    }
 
-        long result = Math.abs(stack1.pop());
-        max = Math.max(result, max);
+    private long calc(long num1, long num2, char op) {
+        long ret;
+        if (op == '+') {
+            ret = num1 + num2;
+        } else if (op == '-') {
+            ret = num1 - num2;
+        } else {
+            ret = num1 * num2;
+        }
+        return ret;
+    }
+
+    private int getPriority(char op) {
+        int priority;
+        if (op == priorities[0]) {
+            priority = 2;
+        } else if (op == priorities[1]) {
+            priority = 1;
+        } else {
+            priority = 0;
+        }
+        return priority;
     }
 }
