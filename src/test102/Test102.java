@@ -1,5 +1,5 @@
 package test102;
-// 그리디/프로그래머스/Level3/보석 쇼핑
+// 투포인터/프로그래머스/Level3/보석 쇼핑
 
 import java.util.HashMap;
 import java.util.HashSet;
