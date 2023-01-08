@@ -1,15 +1,16 @@
 package test102;
-// 프로그래머스/Level3/보석 쇼핑
+// 그리디/프로그래머스/Level3/보석 쇼핑
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class Test102 {
 
     public static void main(String[] args) {
-        String[] gems = {"A", "A", "B"};
+        String[] gems = {"A", "B", "C", "C", "D", "A", "B", "C", "D"};
         int[] result = new Solution().solution(gems);
         for (int i : result) {
             System.out.println(i);
@@ -20,42 +21,27 @@ public class Test102 {
 class Solution {
 
     public int[] solution(String[] gems) {
-        Set<String> set = new HashSet<>();
-        for (String gem : gems) {
-            set.add(gem);
-        }
-        int distinctGemsNum = set.size();
-
-        Map<String, Integer> bought = new HashMap<>();
+        Set<String> set1 = new HashSet<>(List.of(gems));
+        Set<String> set2 = new HashSet<>();
+        Map<String, Integer> map = new HashMap<>();
         int l = 0;
         int r = 0;
-        int answerL = 1;
-        int answerR = gems.length;
-        int minLen = gems.length - 1;
-        while (l <= r) {
-            if (bought.size() == distinctGemsNum) {
-                int len = r - l - 1;
-                if (len < minLen) {
-                    minLen = len;
-                    answerL = l + 1;
-                    answerR = r;
-                }
-
-                bought.put(gems[l], bought.get(gems[l]) - 1);
-                if (bought.get(gems[l]) == 0) {
-                    bought.remove(gems[l]);
-                }
+        int len = Integer.MAX_VALUE;
+        int[] answer = new int[2];
+        while (r < gems.length) {
+            map.put(gems[r], map.getOrDefault(gems[r], 0) + 1);
+            set2.add(gems[r]);
+            while (map.get(gems[l]) > 1) {
+                map.replace(gems[l], map.get(gems[l]) - 1);
                 l++;
-            } else {
-                if (r == gems.length) {
-                    break;
-                }
-
-                bought.put(gems[r], bought.getOrDefault(gems[r], 0) + 1);
-                r++;
             }
+            if (r - l < len && set1.size() == set2.size()) {
+                answer[0] = l + 1;
+                answer[1] = r + 1;
+                len = r - l;
+            }
+            r++;
         }
-
-        return new int[]{answerL, answerR};
+        return answer;
     }
 }
