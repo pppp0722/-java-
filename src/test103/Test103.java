@@ -1,6 +1,7 @@
 package test103;
-// 프로그래머스/Level3/경주로 건설
+// BFS/프로그래머스/Level3/경주로 건설
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -15,79 +16,78 @@ public class Test103 {
 
 class Solution {
 
-    int N;
-    boolean[][][] visited;
-    int[][] dirs = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+    private static final int[] DX = {-1, 0, 1, 0};
+    private static final int[] DY = {0, 1, 0, -1};
+    private int[][] board;
+    private int[][][] cost;
+    private int n;
 
     public int solution(int[][] board) {
-        N = board.length;
-        visited = new boolean[N][N][4];
-
-        return bfs(board);
+        init(board);
+        return findMinCost();
     }
 
-    int bfs(int[][] board) {
+    private void init(int[][] board) {
+        this.board = board;
+        n = board.length;
+        cost = new int[n][n][4];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                Arrays.fill(cost[i][j], Integer.MAX_VALUE);
+            }
+        }
+        Arrays.fill(cost[0][0], 0);
+    }
+
+    private int findMinCost() {
         int minCost = Integer.MAX_VALUE;
         Queue<Point> q = new LinkedList<>();
         q.offer(new Point(0, 0, -1, 0));
         while (!q.isEmpty()) {
-            Point p = q.poll();
-
-            if (p.x == N - 1 && p.y == N - 1) {
-                minCost = Math.min(p.cost, minCost);
+            Point cp = q.poll();
+            if (isGoal(cp.x, cp.y)) {
+                minCost = Math.min(cp.c, minCost);
             }
-
             for (int i = 0; i < 4; i++) {
-                int nx = p.x + dirs[i][0];
-                int ny = p.y + dirs[i][1];
-                if (!isOOB(nx, ny) && board[nx][ny] != 1) {
-                    int nextCost;
-                    if (p.dir == i || p.dir == -1) {
-                        nextCost = p.cost + 100;
-                    } else {
-                        nextCost = p.cost + 600;
-                    }
-                    if (!visited[nx][ny][i] || nextCost <= board[nx][ny]) {
-                        q.offer(new Point(nx, ny, i, nextCost));
-                        visited[nx][ny][i] = true;
-                        board[nx][ny] = nextCost;
-                    }
+                int nx = cp.x + DX[i];
+                int ny = cp.y + DY[i];
+                int nc;
+                if (cp.d == -1 || cp.d == i) {
+                    nc = cp.c + 100;
+                } else {
+                    nc = cp.c + 600;
                 }
+                if (isOOB(nx, ny) || !isMinCost(nx, ny, i, nc)) {
+                    continue;
+                }
+                q.offer(new Point(nx, ny, i, nc));
+                cost[nx][ny][i] = nc;
             }
         }
-
         return minCost;
     }
 
-    boolean isOOB(int x, int y) {
-        if (x < 0) {
-            return true;
-        }
-        if (x >= N) {
-            return true;
-        }
-        if (y < 0) {
-            return true;
-        }
-        if (y >= N) {
-            return true;
-        }
+    private boolean isGoal(int x, int y) {
+        return x == n - 1 && y == n - 1;
+    }
 
-        return false;
+    private boolean isOOB(int x, int y) {
+        return x < 0 || x >= n || y < 0 || y >= n || board[x][y] == 1;
+    }
+
+    private boolean isMinCost(int x, int y, int i, int c) {
+        return c < cost[x][y][i];
     }
 }
 
 class Point {
 
-    int x;
-    int y;
-    int dir;
-    int cost;
+    public int x, y, d, c;
 
-    public Point(int x, int y, int dir, int cost) {
+    public Point(int x, int y, int d, int c) {
         this.x = x;
         this.y = y;
-        this.dir = dir;
-        this.cost = cost;
+        this.d = d;
+        this.c = c;
     }
 }
