@@ -1,94 +1,69 @@
 package test104;
-// 프로그래머스/Level4/동굴 탐험
+// BFS/프로그래머스/Level4/동굴 탐험
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 
 class Solution {
 
-    Map<Integer, List<Integer>> map;
-    boolean[] visited;
-    int[] before;
-    int[] save;
+    private int size;
+    private List<List<Integer>> graph;
+    private int[] before;
+    private int[] after;
 
     public boolean solution(int n, int[][] path, int[][] order) {
-        map = new HashMap<>();
-        visited = new boolean[n];
+        init(n, path, order);
+        return canSearchAllRooms();
+    }
+
+    private void init(int n, int[][] path, int[][] order) {
+        size = n;
+        graph = new ArrayList<>();
         before = new int[n];
-        save = new int[n];
-
-        for (int[] a : path) {
-            List<Integer> list1 = map.getOrDefault(a[0], new ArrayList<>());
-            list1.add(a[1]);
-            map.put(a[0], list1);
-
-            List<Integer> list2 = map.getOrDefault(a[1], new ArrayList<>());
-            list2.add(a[0]);
-            map.put(a[1], list2);
+        after = new int[n];
+        for (int i = 0; i < n; i++) {
+            graph.add(new ArrayList<>());
         }
-
-        for (int[] a : order) {
-            before[a[1]] = a[0];
+        for (int[] arr : path) {
+            graph.get(arr[0]).add(arr[1]);
+            graph.get(arr[1]).add(arr[0]);
         }
-
-        if (before[0] != 0) {
-            return false;
+        for (int[] arr : order) {
+            before[arr[1]] = arr[0];
+            after[arr[0]] = arr[1];
         }
-
-        bfs();
-
-        return getResult();
     }
 
-    void bfs() {
+    private boolean canSearchAllRooms() {
+        int numOfRoomsVisited = 0;
         Queue<Integer> q = new LinkedList<>();
-        for (Integer i : map.get(0)) {
-            q.offer(i);
+        int[] visited = new int[size]; // 0 : 방문 X, 1 : 방문 but 선후관계 X, 2 : 방문
+        if (before[0] == 0) {
+            q.offer(0);
+            visited[0] = 2;
         }
-        visited[0] = true;
         while (!q.isEmpty()) {
-            int n = q.poll();
-
-            if (visited[n]) {
-                continue;
+            int curNode = q.poll();
+            numOfRoomsVisited++;
+            for (int nextNode : graph.get(curNode)) {
+                if (visited[nextNode] == 2) {
+                    continue;
+                }
+                if (visited[before[nextNode]] != 2) {
+                    visited[nextNode] = 1;
+                    continue;
+                }
+                q.offer(nextNode);
+                visited[nextNode] = 2;
             }
-
-            if (!visited[before[n]]) {
-                save[before[n]] = n;
-                continue;
-            }
-
-            visited[n] = true;
-            for (Integer i : map.get(n)) {
-                q.offer(i);
-            }
-            if (save[n] != 0) {
-                q.offer(save[n]);
-            }
-        }
-    }
-
-    boolean getResult() {
-        for (boolean b : visited) {
-            if (!b) {
-                return false;
+            int saveNode = after[curNode];
+            if (saveNode != 0 && visited[saveNode] == 1) {
+                q.offer(saveNode);
+                visited[saveNode] = 2;
             }
         }
-
-        return true;
-    }
-}
-
-public class Test104 {
-
-    public static void main(String[] args) {
-        int n = 9;
-        int[][] path = {{0, 1}, {0, 3}, {0, 7}, {8, 1}, {3, 6}, {1, 2}, {4, 7}, {7, 5}};
-        int[][] order = {{8, 5}, {6, 7}, {4, 1}};
-        boolean result = new Solution().solution(n, path, order);
-        System.out.println(result);
+        return numOfRoomsVisited == size;
     }
 }
