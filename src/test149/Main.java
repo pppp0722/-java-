@@ -1,24 +1,49 @@
 package test149;
-// 백준/골드3/7570 줄 세우기
+// LIS/백준/골드3/7570 줄 세우기
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        String[] line = br.readLine().split(" ");
-        int[] arr = new int[N + 1];
-        int max = 0;
-        for (int i = 0; i < N; i++) {
-            int num = Integer.parseInt(line[i]);
-            arr[num] = arr[num - 1] + 1;
-            max = Math.max(arr[num], max);
-        }
+    private static int n;
+    private static int[] arr;
+    private static int[] pos;
 
-        System.out.println(N - max);
+    public static void main(String[] args) throws IOException {
+        init();
+        System.out.println(findMin());
+    }
+
+    private static void init() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        n = Integer.parseInt(br.readLine());
+        arr = new int[n + 1];
+        pos = new int[n + 1];
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 1; i <= n; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+            pos[arr[i]] = i;
+        }
+        br.close();
+    }
+
+    private static int findMin() {
+        int max = 0;
+        for (int i = 1; i <= n; i++) {
+            int len = 1;
+            int val = arr[i];
+            while (val < n) {
+                if (pos[val + 1] < pos[val]) {
+                    break;
+                }
+                val++;
+                len++;
+            }
+            max = Math.max(len, max);
+        }
+        return n - max;
     }
 }
