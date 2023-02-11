@@ -1,5 +1,5 @@
 package test151;
-// 백준/골드3/1520 내리막길
+// DP/백준/골드3/1520 내리막길
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,64 +8,59 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-    static int N;
-    static int M;
-    static int[][] map;
-    static boolean[][] visited;
-    static int[][] dp;
+    private static final int[] DX = {-1, 0, 1, 0};
+    private static final int[] DY = {0, 1, 0, -1};
+    private static int n;
+    private static int m;
+    private static int[][] map;
+    private static boolean[][] visited;
+    private static int[][] memo;
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] line = br.readLine().split(" ");
-        N = Integer.parseInt(line[0]);
-        M = Integer.parseInt(line[1]);
-        map = new int[N][M];
-        visited = new boolean[N][M];
-        dp = new int[N][M];
-        for (int i = 0; i < N; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int j = 0;
-            while (st.hasMoreTokens()) {
-                map[i][j++] = Integer.parseInt(st.nextToken());
-            }
-        }
-
-        System.out.println(topDown(N - 1, M - 1));
+        init();
+        System.out.println(findNumOfPaths(n - 1, m - 1));
     }
 
-    static int topDown(int x, int y) {
-        if (visited[x][y]) {
-            return dp[x][y];
+    private static void init() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        map = new int[n][m];
+        memo = new int[n][m];
+        visited = new boolean[n][m];
+        memo[0][0] = 1;
+        visited[0][0] = true;
+        for (int i = 0; i < n; i++) {
+            st = new StringTokenizer(br.readLine());
+            for (int j = 0; j < m; j++) {
+                map[i][j] = Integer.parseInt(st.nextToken());
+            }
         }
+    }
 
+    private static int findNumOfPaths(int x, int y) {
+        if (visited[x][y]) {
+            return memo[x][y];
+        }
         visited[x][y] = true;
 
-        if (x == 0 && y == 0) {
-            dp[0][0] = 1;
-            return 1;
+        int numOfPaths = 0;
+        for (int i = 0; i < 4; i++) {
+            int nx = x + DX[i];
+            int ny = y + DY[i];
+
+            if (isOOB(nx, ny) || map[nx][ny] <= map[x][y]) {
+                continue;
+            }
+
+            numOfPaths += findNumOfPaths(nx, ny);
         }
 
-        int u = 0;
-        if (x - 1 >= 0 && map[x - 1][y] > map[x][y]) {
-            u = topDown(x - 1, y);
-        }
-        int r = 0;
-        if (y + 1 < M && map[x][y + 1] > map[x][y]) {
-            r = topDown(x, y + 1);
-        }
-        int d = 0;
-        if (x + 1 < N && map[x + 1][y] > map[x][y]) {
-            d = topDown(x + 1, y);
-        }
-        int l = 0;
-        if (y - 1 >= 0 && map[x][y - 1] > map[x][y]) {
-            l = topDown(x, y - 1);
-        }
+        return memo[x][y] = numOfPaths;
+    }
 
-        int path = u + r + d + l;
-
-        dp[x][y] = path;
-
-        return path;
+    private static boolean isOOB(int x, int y) {
+        return x < 0 || x >= n || y < 0 || y >= m;
     }
 }
