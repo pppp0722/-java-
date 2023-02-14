@@ -1,86 +1,112 @@
 package test154;
-// 백준/골드3/1238 파티
+// 다익/백준/골드3/1238 파티
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
 
 public class Main {
 
+    private static int n;
+    private static int m;
+    private static int x;
+    private static List<List<Node>> graph;
+
     public static void main(String[] args) throws IOException {
+        init();
+        System.out.println(findMaxTime());
+    }
+
+    private static void init() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] line = br.readLine().split(" ");
-        int N = Integer.parseInt(line[0]);
-        int M = Integer.parseInt(line[1]);
-        int X = Integer.parseInt(line[2]);
-        List<List<Edge>> graph = new ArrayList<>();
-        for (int i = 0; i <= N; i++) {
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        x = Integer.parseInt(st.nextToken());
+        graph = new ArrayList<>();
+        for (int i = 0; i <= n; i++) {
             graph.add(new ArrayList<>());
         }
-        for (int i = 0; i < M; i++) {
-            line = br.readLine().split(" ");
-            int from = Integer.parseInt(line[0]);
-            int to = Integer.parseInt(line[1]);
-            int cost = Integer.parseInt(line[2]);
-            graph.get(from).add(new Edge(to, cost));
+        for (int i = 0; i < m; i++) {
+            st = new StringTokenizer(br.readLine());
+            int start = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
+            int time = Integer.parseInt(st.nextToken());
+            graph.get(start).add(new Node(end, time));
         }
+        br.close();
+    }
 
-        int[][] dist = new int[N + 1][N + 1];
+    private static int findMaxTime() {
+        int maxTime;
+        int[] goTimes = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            goTimes[i] = getTimes(i)[x];
+        }
+        int[] comeTimes = getTimes(x);
+        maxTime = getMax(goTimes, comeTimes);
+        return maxTime;
+    }
 
-        for (int i = 1; i <= N; i++) {
-            boolean[] visited = new boolean[N + 1];
-            int[] curDist = new int[N + 1];
-            for (int j = 1; j <= N; j++) {
-                curDist[j] = Integer.MAX_VALUE;
+    private static int[] getTimes(int startVertex) {
+        int[] times = new int[n + 1];
+        PriorityQueue<Node> pq = new PriorityQueue<>();
+        Arrays.fill(times, Integer.MAX_VALUE);
+        times[startVertex] = 0;
+        pq.offer(new Node(startVertex, 0));
+        while (!pq.isEmpty()) {
+            Node node = pq.poll();
+            int vertex = node.getVertex();
+            int time = node.getTime();
+            if (time < times[vertex]) {
+                continue;
             }
-            curDist[i] = 0;
-
-            for (int j = 1; j <= N; j++) {
-                int idx = 0;
-                int cost = Integer.MAX_VALUE;
-                for (int k = 1; k <= N; k++) {
-                    if (!visited[k] && curDist[k] < cost) {
-                        cost = curDist[k];
-                        idx = k;
-                    }
-                }
-
-                visited[idx] = true;
-
-                for (Edge edge : graph.get(idx)) {
-                    curDist[edge.getTo()] = Math.min(cost + edge.getCost(), curDist[edge.getTo()]);
+            for (Node nextNode : graph.get(vertex)) {
+                int nextVertex = nextNode.getVertex();
+                int nextTime = time + nextNode.getTime();
+                if (nextTime < times[nextVertex]) {
+                    times[nextVertex] = nextTime;
+                    pq.offer(new Node(nextVertex, nextTime));
                 }
             }
-
-            dist[i] = curDist;
         }
+        return times;
+    }
 
-        int answer = 0;
-        for (int i = 1; i <= N; i++) {
-            answer = Math.max(dist[i][X] + dist[X][i], answer);
+    private static int getMax(int[] arr1, int[] arr2) {
+        int max = 0;
+        for (int i = 1; i <= n; i++) {
+            max = Math.max(arr1[i] + arr2[i], max);
         }
-
-        System.out.println(answer);
+        return max;
     }
 }
 
-class Edge {
+class Node implements Comparable<Node> {
 
-    private int to;
-    private int cost;
+    private final int vertex;
+    private final int time;
 
-    public Edge(int to, int cost) {
-        this.to = to;
-        this.cost = cost;
+    public Node(int vertex, int time) {
+        this.vertex = vertex;
+        this.time = time;
     }
 
-    public int getTo() {
-        return to;
+    public int getVertex() {
+        return vertex;
     }
 
-    public int getCost() {
-        return cost;
+    public int getTime() {
+        return time;
+    }
+
+    @Override
+    public int compareTo(Node o) {
+        return time - o.time;
     }
 }
