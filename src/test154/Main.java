@@ -13,7 +13,6 @@ import java.util.StringTokenizer;
 public class Main {
 
     private static int n;
-    private static int m;
     private static int x;
     private static List<List<Node>> graph;
 
@@ -26,7 +25,7 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
         x = Integer.parseInt(st.nextToken());
         graph = new ArrayList<>();
         for (int i = 0; i <= n; i++) {
