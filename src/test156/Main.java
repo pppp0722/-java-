@@ -1,100 +1,99 @@
 package test156;
-// 백준/골드4/4485 녹색 옷 입은 애가 젤다지?
+// 다익/백준/골드4/4485 녹색 옷 입은 애가 젤다지?
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.stream.Stream;
+import java.util.StringTokenizer;
 
 public class Main {
 
-    static int dx[] = {-1, 0, 1, 0};
-    static int dy[] = {0, 1, 0, -1};
+    private static final BufferedReader BUFFERED_READER = new BufferedReader(new InputStreamReader(System.in));
+    private static final int[] DX = {-1, 0, 1, 0};
+    private static final int[] DY = {0, 1, 0, -1};
+
+    private static int n;
+    private static int[][] map;
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         int idx = 1;
         while (true) {
-            int N = Integer.parseInt(br.readLine());
-
-            if (N == 0) {
+            init();
+            if (isQuit()) {
                 break;
             }
-
-            int[][] map = new int[N][N];
-            for (int i = 0; i < N; i++) {
-                map[i] = Stream.of(br.readLine().split(" "))
-                    .mapToInt(Integer::parseInt)
-                    .toArray();
-            }
-
-            int[][] lose = new int[N][N];
-            for (int i = 0; i < N; i++) {
-                for (int j = 0; j < N; j++) {
-                    lose[i][j] = Integer.MAX_VALUE;
-                }
-            }
-            lose[0][0] = map[0][0];
-            Queue<Point> q = new LinkedList<>();
-            q.offer(new Point(0, 0, map[0][0]));
-
-            while (!q.isEmpty()) {
-                Point cur = q.poll();
-
-                for (int i = 0; i < 4; i++) {
-                    int nx = cur.getX() + dx[i];
-                    int ny = cur.getY() + dy[i];
-
-                    if (isOOB(N, nx, ny)) {
-                        continue;
-                    }
-
-                    int nLose = cur.getLose() + map[nx][ny];
-                    if (nLose < lose[nx][ny]) {
-                        lose[nx][ny] = nLose;
-                        q.offer(new Point(nx, ny, nLose));
-                    }
-                }
-            }
-
-            System.out.println("Problem " + idx + ": " + lose[N - 1][N - 1]);
+            int min = findMin();
+            print(idx, min);
             idx++;
+        }
+        BUFFERED_READER.close();
+    }
+
+    private static void init() throws IOException {
+        n = Integer.parseInt(BUFFERED_READER.readLine());
+        if (n != 0) {
+            map = new int[n][n];
+            StringTokenizer st;
+            for (int i = 0; i < n; i++) {
+                st = new StringTokenizer(BUFFERED_READER.readLine());
+                for (int j = 0; j < n; j++) {
+                    map[i][j] = Integer.parseInt(st.nextToken());
+                }
+            }
         }
     }
 
-    private static boolean isOOB(int N, int x, int y) {
-        if (x < 0 || x >= N || y < 0 || y >= N) {
-            return true;
-        }
+    private static boolean isQuit() {
+        return n == 0;
+    }
 
-        return false;
+    private static int findMin() {
+        Queue<Node> q = new LinkedList<>();
+        int[][] lose = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            Arrays.fill(lose[i], Integer.MAX_VALUE);
+        }
+        lose[0][0] = map[0][0];
+        q.offer(new Node(0, 0, map[0][0]));
+        while (!q.isEmpty()) {
+            Node node = q.poll();
+            for (int i = 0; i < 4; i++) {
+                int nx = node.x + DX[i];
+                int ny = node.y + DY[i];
+                if (isOOB(nx, ny)) {
+                    continue;
+                }
+                int nw = node.w + map[nx][ny];
+                if (nw < lose[nx][ny]) {
+                    lose[nx][ny] = nw;
+                    q.offer(new Node(nx, ny, nw));
+                }
+            }
+        }
+        return lose[n - 1][n - 1];
+    }
+
+    private static boolean isOOB(int x, int y) {
+        return x < 0 || x >= n || y < 0 || y >= n;
+    }
+
+    private static void print(int idx, int min) {
+        System.out.println("Problem " + idx + ": " + min);
     }
 }
 
-class Point {
+class Node {
 
-    private int x;
-    private int y;
-    private int lose;
+    public int x;
+    public int y;
+    public int w;
 
-    public Point(int x, int y, int lose) {
+    public Node(int x, int y, int w) {
         this.x = x;
         this.y = y;
-        this.lose = lose;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getLose() {
-        return lose;
+        this.w = w;
     }
 }
