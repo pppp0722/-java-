@@ -37,3 +37,9 @@ order by animal_id asc;
 select animal_id, name, datetime
 from animal_ins
 order by name asc, datetime desc;
+
+-- SELECT/프로그래머스/Level1/아픈 동물 찾기
+select animal_id, name
+from animal_ins
+where intake_condition = 'Sick'
+order by animal_id asc;
