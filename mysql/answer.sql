@@ -43,3 +43,8 @@ select animal_id, name
 from animal_ins
 where intake_condition = 'Sick'
 order by animal_id asc;
+
+-- SELECT/프로그래머스/Level1/역순 정렬하기
+select name, datetime
+from animal_ins
+order by animal_id desc;
