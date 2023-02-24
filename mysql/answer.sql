@@ -3,6 +3,6 @@ select min(datetime) as '시간'
 from animal_ins;
 
 -- SUM,MAX,MIN/프로그래머스/Level2/중복 제거하기
-select count(distinct name)
+select count(distinct name) as 'count'
 from animal_ins
 where name is not null;
