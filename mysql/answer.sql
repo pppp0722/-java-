@@ -32,3 +32,8 @@ order by animal_id asc;
 select animal_id, name
 from animal_ins
 order by animal_id asc;
+
+-- SELECT/프로그래머스/Level1/여러 기준으로 정렬하기
+select animal_id, name, datetime
+from animal_ins
+order by name asc, datetime desc;
