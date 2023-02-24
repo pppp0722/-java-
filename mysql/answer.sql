@@ -48,3 +48,9 @@ order by animal_id asc;
 select name, datetime
 from animal_ins
 order by animal_id desc;
+
+-- String,Date/프로그래머스/Level2/이름에 el이 들어가는 동물 찾기
+select animal_id, name
+from animal_ins
+where animal_type = 'Dog' and name like '%el%'
+order by name asc;
