@@ -21,3 +21,9 @@ order by animal_id asc;
 select name
 from animal_ins
 order by datetime asc limit 1;
+
+-- SELECT/프로그래머스/Level1/어린 동물 찾기
+select animal_id, name
+from animal_ins
+where intake_condition != 'Aged'
+order by animal_id asc;
