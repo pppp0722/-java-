@@ -73,3 +73,23 @@ order by factory_id asc;
 select count(user_id) as 'USERS'
 from user_info
 where age is null;
+
+-- IS NULL/프로그래머스/Level2/NULL 처리하기
+-- IF NULL 사용
+select animal_type, ifnull(name, 'No name') as 'name', sex_upon_intake
+from animal_ins
+order by animal_id asc;
+-- CASE 사용
+select
+    animal_type,
+    case
+        when name is null then 'No name'
+        else name
+    end as 'name',
+    sex_upon_intake
+from animal_ins
+order by animal_id asc;
+-- COALESCE 사용
+select animal_type, coalesce(name, 'No name') as 'name', sex_upon_intake
+from animal_ins
+order by animal_id asc;
