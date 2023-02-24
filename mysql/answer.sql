@@ -68,3 +68,8 @@ select factory_id, factory_name, address
 from food_factory
 where address like '강원도%'
 order by factory_id asc;
+
+-- IS NULL/프로그래머스/Level1/나이 정보가 없는 회원 수 구하기
+select count(user_id) as 'USERS'
+from user_info
+where age is null;
