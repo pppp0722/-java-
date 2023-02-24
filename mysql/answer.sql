@@ -62,3 +62,9 @@ where name is not null
 group by name
 having count >= 2
 order by name asc;
+
+-- SELECT/프로그래머스/Level1/강원도에 위치한 생산공장 목록 출력하기
+select factory_id, factory_name, address
+from food_factory
+where address like '강원도%'
+order by factory_id asc;
