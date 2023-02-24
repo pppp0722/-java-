@@ -54,3 +54,11 @@ select animal_id, name
 from animal_ins
 where animal_type = 'Dog' and name like '%el%'
 order by name asc;
+
+-- GROUP BY/프로그래머스/Level2/동명 동물 수 찾기
+select name, count(animal_id) as 'count'
+from animal_ins
+where name is not null
+group by name
+having count >= 2
+order by name asc;
