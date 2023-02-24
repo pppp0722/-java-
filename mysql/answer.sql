@@ -16,3 +16,8 @@ select animal_id
 from animal_ins
 where name is not null
 order by animal_id asc;
+
+-- SELECT/프로그래머스/Level1/상위 n개 레코드
+select name
+from animal_ins
+order by datetime asc limit 1;
