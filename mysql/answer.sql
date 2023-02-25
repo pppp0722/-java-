@@ -93,3 +93,8 @@ order by animal_id asc;
 select animal_type, coalesce(name, 'No name') as 'name', sex_upon_intake
 from animal_ins
 order by animal_id asc;
+
+-- SUM,MAX,MIN/프로그래머스/Level2/가격이 제일 비싼 식품의 정보 출력하기
+select *
+from food_product
+order by price desc limit 1;
