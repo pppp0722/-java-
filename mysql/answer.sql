@@ -135,3 +135,10 @@ order by animal_id asc;
 -- SUM,MAX,MIN/프로그래머스/Level1/가장 비싼 상품 구하기
 select max(price) as 'max_price'
 from product;
+
+-- GROUP BY/프로그래머스/Level2/입양 시각 구하기(1)
+select hour(datetime) as 'hour', count(animal_id) as 'count'
+from animal_outs
+where hour(datetime) >= 9 and hour(datetime) < 20
+group by hour
+order by hour asc;
