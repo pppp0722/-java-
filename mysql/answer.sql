@@ -115,3 +115,8 @@ select animal_type, count(animal_id) as 'count'
 from animal_ins
 group by animal_type
 order by animal_type asc;
+
+-- String,Date/프로그래머스/Level2/중성화 여부 파악하기
+select animal_id, name,
+       if(sex_upon_intake like 'Neutered%' or sex_upon_intake like 'Spayed%', 'O', 'X') as '중성화'
+from animal_ins;
