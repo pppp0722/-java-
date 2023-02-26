@@ -120,3 +120,8 @@ order by animal_type asc;
 select animal_id, name,
        if(sex_upon_intake like 'Neutered%' or sex_upon_intake like 'Spayed%', 'O', 'X') as '중성화'
 from animal_ins;
+
+-- SELECT/프로그래머스/Level1/조건에 맞는 회원수 구하기
+select count(user_id) as 'users'
+from user_info
+where year(joined) = '2021' and age >= 20 and age < 30;
