@@ -125,3 +125,9 @@ from animal_ins;
 select count(user_id) as 'users'
 from user_info
 where year(joined) = '2021' and age >= 20 and age < 30;
+
+-- IS NULL/프로그래머스/Level1/이름이 없는 동물의 아이디
+select animal_id
+from animal_ins
+where name is null
+order by animal_id asc;
