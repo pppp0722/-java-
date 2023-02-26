@@ -103,3 +103,9 @@ order by price desc limit 1;
 select animal_id, name, date_format(datetime, '%Y-%m-%d') as '날짜'
 from animal_ins
 order by animal_id asc;
+
+-- IS NULL/프로그래머스/Level1/경기도에 위치한 식품창고 목록 출력하기
+select warehouse_id, warehouse_name, address, ifnull(freezer_yn, 'N') as 'freezer_yn'
+from food_warehouse
+where address like '경기도%'
+order by warehouse_id asc;
