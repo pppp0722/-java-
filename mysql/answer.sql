@@ -109,3 +109,9 @@ select warehouse_id, warehouse_name, address, ifnull(freezer_yn, 'N') as 'freeze
 from food_warehouse
 where address like '경기도%'
 order by warehouse_id asc;
+
+-- GROUP BY/프로그래머스/Level2/고양이와 개는 몇 마리 있을까
+select animal_type, count(animal_id) as 'count'
+from animal_ins
+group by animal_type
+order by animal_type asc;
