@@ -46,7 +46,7 @@ public class Main {
         // min 구하기
         for (int i = 2; i <= num; i++) {
             for (int j = 0; j < costs.length; j++) {
-                if(i == 6 && j == 0) {
+                if (i == 6 && j == 0) {
                     continue;
                 }
                 int preIdx = i - costs[j];
@@ -67,7 +67,7 @@ public class Main {
         // max 구하기
         for (int i = 2; i <= num; i++) {
             for (int j = 0; j < costs.length; j++) {
-                if(i == 6 && j == 0) {
+                if (i == 6 && j == 0) {
                     continue;
                 }
                 int preIdx = i - costs[j];
