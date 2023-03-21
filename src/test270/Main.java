@@ -12,9 +12,7 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-    private static int n;
     private static int r;
-    private static int q;
     private static List<List<Integer>> tree;
     private static int[] queryArr;
     private static int[] numOfNodesArr;
@@ -32,9 +30,9 @@ public class Main {
     private static void init() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        n = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(st.nextToken());
         r = Integer.parseInt(st.nextToken());
-        q = Integer.parseInt(st.nextToken());
+        int q = Integer.parseInt(st.nextToken());
         tree = new ArrayList<>();
         for (int i = 0; i <= n; i++) {
             tree.add(new ArrayList<>());
