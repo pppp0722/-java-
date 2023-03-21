@@ -52,13 +52,13 @@ public class Main {
         br.close();
     }
 
-    private static int findNumOfNodes(int node, int preNode) {
-        int numOfNodes = 1; // 자기 자신
-        tree.get(node).removeIf(e -> e == preNode);
-        for (int nextNode : tree.get(node)) {
-            numOfNodes += findNumOfNodes(nextNode, node);
+    private static int findNumOfNodes(int curNode, int parentNode) {
+        int numOfNodes = 1;
+        tree.get(curNode).removeIf(e -> e == parentNode);
+        for (int childNode : tree.get(curNode)) {
+            numOfNodes += findNumOfNodes(childNode, curNode);
         }
-        numOfNodesArr[node] = numOfNodes;
+        numOfNodesArr[curNode] = numOfNodes;
         return numOfNodes;
     }
 }
