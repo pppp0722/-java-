@@ -28,27 +28,32 @@ public class Main {
                 map[i][j] = Integer.parseInt(st.nextToken());
             }
         }
+
         // BFS
         int answer = 0;
         while (true) {
             boolean[][] visited = new boolean[n][n];
             boolean check = false;
+
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
                     if (visited[i][j]) {
                         continue;
                     }
-                    int num = 0;
+
+                    int num = map[i][j];
                     Stack<int[]> stack = new Stack<>();
+                    stack.push(new int[]{i, j});
+
                     Queue<int[]> q = new LinkedList<>();
                     q.offer(new int[]{i, j});
-                    stack.push(new int[]{i, j});
-                    num += map[i][j];
                     visited[i][j] = true;
+
                     while (!q.isEmpty()) {
                         int[] pos = q.poll();
                         int x = pos[0];
                         int y = pos[1];
+
                         for (int k = 0; k < 4; k++) {
                             int nx = x + DX[k];
                             int ny = y + DY[k];
@@ -56,6 +61,7 @@ public class Main {
                             if (nx < 0 || nx >= n || ny < 0 || ny >= n || visited[nx][ny]) {
                                 continue;
                             }
+
                             if (Math.abs(map[x][y] - map[nx][ny]) < l
                                 || Math.abs(map[x][y] - map[nx][ny]) > r) {
                                 continue;
@@ -63,26 +69,32 @@ public class Main {
 
                             q.offer(new int[]{nx, ny});
                             visited[nx][ny] = true;
-                            stack.push(new int[]{nx, ny});
+
                             num += map[nx][ny];
+                            stack.push(new int[]{nx, ny});
                         }
                     }
 
                     int size = stack.size();
-                    if(size > 1) {
+
+                    if (size > 1) {
                         check = true;
                     }
-                    while(!stack.isEmpty()) {
+
+                    while (!stack.isEmpty()) {
                         int[] pos = stack.pop();
                         map[pos[0]][pos[1]] = num / size;
                     }
                 }
             }
-            if(!check) {
+
+            if (!check) {
                 break;
             }
+
             answer++;
         }
+
         System.out.println(answer);
     }
 }
